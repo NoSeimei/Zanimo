@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 11 août 2021 à 10:02
+-- Généré le : mer. 11 août 2021 à 10:55
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -159,14 +159,12 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Login` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Prenom` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateNaiss` date DEFAULT NULL,
-  `IdProfession` int(11) NOT NULL,
+  `Login` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IdUserType` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `IdProfession` (`IdProfession`),
   KEY `IdUserType` (`IdUserType`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
