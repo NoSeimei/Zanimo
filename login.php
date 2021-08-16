@@ -12,13 +12,10 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
   try {
 	  //on test la connexion du user
     $Users = new Users();
-    $requete = $Users->GetAllUser();
-    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
-    $allUser = $requete->fetchAll();
-    // $pass = MD5($pass);
+    $allUser = $Users->GetAllUser();
     foreach ($allUser as $theUser) {
 		//si il se connecte on initialise la varible de session sinon on l'averti
-      if ($theUser->getLogin() === $user && $theUser->getPassword() === $pass) {
+      if ($theUser->getLogin() === $user && MD5($theUser->getPassword()) === $pass) {
 		$_SESSION['identAd']=$theUser->getLogin();
 
         header("Location: test.php");

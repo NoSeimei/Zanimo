@@ -7,7 +7,9 @@ class Users{
     private $Id_User;  
     private $Nom;
     private $Prenom;
-    private $DateNaissance;
+    private $DateNaiss;
+    private $Telephone;
+    private $Email;
     private $Login;
     private $Password;
     private $IdUserType;
@@ -75,9 +77,9 @@ class Users{
     /**
      * Get the value of DateNaissance
      */ 
-    public function getDateNaissance()
+    public function getDateNaiss()
     {
-        return $this->DateNaissance;
+        return $this->DateNaiss;
     }
 
     /**
@@ -85,9 +87,49 @@ class Users{
      *
      * @return  self
      */ 
-    public function setDateNaissance($DateNaissance)
+    public function setDateNaiss($DateNaiss)
     {
-        $this->DateNaissance = $DateNaissance;
+        $this->DateNaiss = $DateNaiss;
+
+        return $this;
+    }
+    
+    /**
+     * Get the value of Telephone
+     */ 
+    public function getTelephone()
+    {
+        return $this->Telephone;
+    }
+
+    /**
+     * Set the value of Telephone
+     *
+     * @return  self
+     */ 
+    public function setTelephone($Telephone)
+    {
+        $this->Telephone = $Telephone;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Email
+     */ 
+    public function getEmail()
+    {
+        return $this->Email;
+    }
+
+    /**
+     * Set the value of Email
+     *
+     * @return  self
+     */ 
+    public function setEmail($Email)
+    {
+        $this->Email = $Email;
 
         return $this;
     }
@@ -157,10 +199,40 @@ class Users{
             $co = new Connexion();
             $dbco = $co->getConnexion();
             $requete = $dbco->query("SELECT * FROM users");
-            return $requete;
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+            $allUser = $requete->fetchAll();
+            return $allUser;
             } catch (Exception $exD) {
             echo $exD;
             }
     }
+    
+    public function CheckUser(string $ident) {
+        try {
+            $isUserExist = true;
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM `users` WHERE Identifiant = :Identifiant");
+		    $requete->execute(array('Identifiant' => $ident));
+		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+		    $user = $requete->fetchAll();
+            if(empty($user)){
+                $isUserExist = false;
+            }
+            return $isUserExist;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+
+    public function InsertUser(Users $user)
+    {
+        $co = new Connexion();
+        $dbco = $co->getConnexion();
+        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Login,Password, IdUserType)
+        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Login,MD5(:Password), :IdUserType)");
+        $request->execute(dismountU($user));
+    }
+
 }
 ?>

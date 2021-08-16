@@ -1,3 +1,8 @@
+<?php
+include("Class/UserType.php"); 
+$usersType = new UserType();
+$usersType = $usersType->GetAllUserType();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -13,11 +18,19 @@
 </head>
 
 <body>
-
-    <form class="login" action="login.php" method="post">
+    <form class="login" action="signIn.php" method="post">
+        <input type="text" placeholder="Nom" name="firstname">
+        <input type="text" placeholder="Prénom" name="lastname">
+        <input type="date" placeholder="Date de naissance" name="dateN">
+        <input type="tel" placeholder="Téléphone" name="telephone">
+        <input type="mail" placeholder="Email" name="mail">
         <input type="text" placeholder="Identifiant" name="login">
         <input type="password" placeholder="Mot de passe" name="password">
-        <button>Connexion</button> <a href="inscription.php">Inscription</a>
+        <select class="selection-1" name="idUserType">
+            <?php foreach ($usersType as $userType) { ?> <option value="<?php echo $userType->getId_TypeUser(); ?>"> <?php echo $userType->getTypeUser(); ?></option>
+                <?php } ?>
+        </select><br/>
+        <button>Inscription</button>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
