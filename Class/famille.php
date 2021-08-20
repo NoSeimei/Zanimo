@@ -1,4 +1,5 @@
 <?php
+include("Class/Connexion.php");
 Class Famille
 {
 
@@ -138,6 +139,26 @@ Class Famille
         $this->CodePostal = $CodePostal;
 
         return $this;
+    }
+    public function GetAllFamille() {
+        try {
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->query("SELECT * FROM animal");
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'Animal');
+            $allFamille = $requete->fetchAll();
+            return $allFamille;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+    public function InsertFamille(Users $Famille)
+    {
+        $co = new Connexion();
+        $dbco = $co->getConnexion();
+        $request = $dbco->prepare("INSERT INTO famille(id, Nom, Num1, Num2, Email, Adresse, CodePostal) 
+        VALUES (:id, :Nom, :Num1, :Num2, :Email, :Adresse, :CodePostal)");
+        $request->execute(dismountU($Famille));
     }
 }
 

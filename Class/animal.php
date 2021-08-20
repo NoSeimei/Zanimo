@@ -1,4 +1,5 @@
 <?php
+include("Class/Connexion.php");
 Class Animal
 {
     private $Id;
@@ -172,6 +173,26 @@ Class Animal
         $this->IdUsers = $IdUsers;
 
         return $this;
+    }
+    public function GetAllAnimal() {
+        try {
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->query("SELECT * FROM animal");
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'Animal');
+            $allAnimal = $requete->fetchAll();
+            return $allAnimal;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+    public function InsertAnimal(Users $animal)
+    {
+        $co = new Connexion();
+        $dbco = $co->getConnexion();
+        $request = $dbco->prepare("INSERT INTO animal( Nom, Robe, Etat, Espece, Poids, DateDeNaissance, NumeroPuce, IdUsers) 
+        VALUES (:Nom, :Robe, :Etat, :Espece, :Poids, :DateDeNaissance, :NumeroPuce, :IdUsers)");
+        $request->execute(dismountU($animal));
     }
 }
 
