@@ -2,6 +2,7 @@
 
 include("Function/Function.php");
 include("Class/Users.php");
+include("Class/Vaccination.php");
 
 if (isset($_POST["firstname"]))
 	{
