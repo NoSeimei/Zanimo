@@ -18,7 +18,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
       if ($theUser->getLogin() === $user && MD5($theUser->getPassword()) === $pass) {
 		$_SESSION['identAd']=$theUser->getLogin();
 
-        header("Location: test.php");
+        header("Location: accueil.php");
         break;
       } 
 

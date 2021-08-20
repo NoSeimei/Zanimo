@@ -13,12 +13,6 @@
     <!--Bootshape-->
     <link href="css/bootshape.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
     <!-- Navigation bar -->
@@ -31,11 +25,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span class="green">Zoo</span> Planet</a>
+          <a class="navbar-brand" href="#"><span class="green">Zanimo</span></a>
         </div>
         <nav role="navigation" class="collapse navbar-collapse navbar-right">
           <ul class="navbar-nav nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="#">Accueil</a></li>
             <li class="dropdown">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -46,9 +40,9 @@
                 <li><a href="#">All Items</a></li>
               </ul>
             </li>
-            <li><a href="#">Special Offers</a></li>
+            <li><a href="#">Vaccination</a></li>
             <li><a href="#">License</a></li>
-            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Mon compte</a></li>
           </ul>
         </nav>
       </div>
