@@ -12,6 +12,7 @@ class Users{
     private $Email;
     private $Identifiant;
     private $Password;
+    private $Token;
     private $IdUserType;
 
     /**
@@ -175,6 +176,26 @@ class Users{
     }
 
     /**
+     * Get the value of Token
+     */ 
+    public function getToken()
+    {
+        return $this->Token;
+    }
+
+    /**
+     * Set the value of Token
+     *
+     * @return  self
+     */ 
+    public function setToken($Token)
+    {
+        $this->Token = $Token;
+
+        return $this;
+    }
+
+    /**
      * Get the value of IdUserType
      */ 
     public function getIdUserType()
@@ -220,8 +241,8 @@ class Users{
             $requete = $dbco->prepare("SELECT * FROM `users` WHERE Identifiant = :Identifiant");
 		    $requete->execute(array('Identifiant' => $ident));
 		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
-		    $user = $requete->fetchAll();
-            if(count($user) < 0){
+		    $user = $requete->fetch();
+            if(empty($user)){
                 $isUserExist = false;
             }
             return $isUserExist;
@@ -248,6 +269,39 @@ class Users{
             }
     }
 
+    public function CheckResetPassword(string $email, $token) {
+        try {
+            $isUserExist = true;
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM `users` WHERE Email = :Email AND Token = :Token");
+		    $requete->execute(array('Email' => $email, 'Token' => $token));
+		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+		    $user = $requete->fetch();
+            if(empty($user) < 0){
+                $isUserExist = false;
+            }
+            return $isUserExist;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+
+
+    public function UpdateNewPassword(string $email, $pass) {
+        try {
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $token = "";
+            $request = $dbco->prepare("UPDATE `users` set `Token` = :Token, `Password` = :Password WHERE Email = :Email");
+            $request->execute(array('Token' => $token, 'Password' => $pass, 'Email' => $email));
+            return true;
+        } catch (Exception $exD) {
+        echo $exD;
+        }
+    }
+
+
     public function InsertTokenPasswordForgot(string $token, string $email)
     {
         $co = new Connexion();
@@ -260,8 +314,8 @@ class Users{
     {
         $co = new Connexion();
         $dbco = $co->getConnexion();
-        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Login,Password, IdUserType)
-        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Login,MD5(:Password), :IdUserType)");
+        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Identifiant,Password, Token,IdUserType)
+        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Identifiant,MD5(:Password), :Token,:IdUserType)");
         $request->execute(dismountU($user));
     }
 

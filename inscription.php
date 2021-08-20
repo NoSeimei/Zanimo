@@ -20,7 +20,6 @@ $usersType = $usersType->GetAllUserType();
     <!--Bootshape-->
     <link href="css/bootshape.css" rel="stylesheet">
 </head>
-
 <body>
     <form class="login" action="signIn.php" method="post">
         <input type="text" placeholder="Nom" name="firstname">
@@ -30,6 +29,7 @@ $usersType = $usersType->GetAllUserType();
         <input type="mail" placeholder="Email" name="mail">
         <input type="text" placeholder="Identifiant" name="login">
         <input type="password" placeholder="Mot de passe" name="password">
+        <input type="password" placeholder="Confirmation mot de passe" name="confirmpassword">
         <select class="selection-1" name="idUserType">
             <?php foreach ($usersType as $userType) { ?> <option value="<?php echo $userType->getId_TypeUser(); ?>"> <?php echo $userType->getTypeUser(); ?></option>
                 <?php } ?>

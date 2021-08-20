@@ -1,3 +1,14 @@
+<?php
+if(isset($_POST['newpassword']) && isset($_POST['confirmnewpassword']) && $_POST['reset_link_token'] && $_POST['email'])
+{
+include("Class/Users.php"); 
+$emailId = $_POST['email'];
+// $token = $_POST['reset_link_token'];
+$password = md5($_POST['newpassword']);
+$user = new Users();
+$isExist = $user->UpdateNewPassword($emailId, $password);
+
+if($isExist == true){ ?>
 <!doctype html>
 <html lang="en">
 
@@ -14,13 +25,9 @@
 
 <body>
 
-    <form class="login" action="login.php" method="post">
-        <h1>Connexion Zanimo</h1>
-        <input type="text" placeholder="Identifiant" name="login">
-        <input type="password" placeholder="Mot de passe" name="password">
-        <button>Connexion</button>
-        <a style="color: green;" href="inscription.php">Inscription</a>
-        <a href="motdepassoublie.html" style="text-align: left; left: inherit;">Mot de passe oublié ?</a>
+    <form class="login" action="index.html" method="post">
+        <h2>Votre mot de passe a bien été modifié !</h2>
+        <button style="width: 150px;">Se connecter</button>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -30,3 +37,9 @@
 </body>
 
 </html>
+<?php
+}else{
+echo "<p>Something goes wrong. Please try again</p>";
+}
+}
+?>
