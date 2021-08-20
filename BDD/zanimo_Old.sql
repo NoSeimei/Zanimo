@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 août 2021 à 07:21
+-- Généré le : mer. 11 août 2021 à 10:55
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -157,27 +157,16 @@ CREATE TABLE IF NOT EXISTS `traitementspe` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `Id_User` int(11) NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Prenom` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DateNaiss` date DEFAULT NULL,
-  `Telephone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `Email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Login` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IdUserType` int(11) NOT NULL,
-  PRIMARY KEY (`Id_User`),
+  PRIMARY KEY (`Id`),
   KEY `IdUserType` (`IdUserType`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`Id_User`, `Nom`, `Prenom`, `DateNaiss`, `Telephone`, `Email`, `Login`, `Password`, `IdUserType`) VALUES
-(1, 'Delaterasse', 'Jean', '1999-07-18', '', '', 'admin', 'admin', 1),
-(2, 'Jean', 'Oui', '2021-08-19', '069582526', 'a@a.fr', 'test', 'd41d8cd98f00b204e9800998ecf8427e', 1),
-(3, 'test', 'yes', '2021-08-20', '051226231', 'aa@aa.fr', 'lebeauemmanuel9@gmail.com', '8d55e4cfc73d0bade859a63d55bcd3c3', 1);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -187,18 +176,10 @@ INSERT INTO `users` (`Id_User`, `Nom`, `Prenom`, `DateNaiss`, `Telephone`, `Emai
 
 DROP TABLE IF EXISTS `usertype`;
 CREATE TABLE IF NOT EXISTS `usertype` (
-  `Id_TypeUser` int(11) NOT NULL AUTO_INCREMENT,
-  `TypeUser` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`Id_TypeUser`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `usertype`
---
-
-INSERT INTO `usertype` (`Id_TypeUser`, `TypeUser`) VALUES
-(1, 'Veterinaire'),
-(2, 'Personne');
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `TypeUser` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
