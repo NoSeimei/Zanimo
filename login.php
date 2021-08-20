@@ -18,14 +18,13 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
       if ($theUser->getLogin() === $user && MD5($theUser->getPassword()) === $pass) {
 		$_SESSION['identAd']=$theUser->getLogin();
 
-        header("Location: gestanim.php");
+        header("Location: accueil.php");
         break;
       } 
 
       else {
 
         echo"test";
-        var_dump( $allUser);
     //   echo  " <script>
     //             window.onload = function() 
     //               {
