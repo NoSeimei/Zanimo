@@ -243,13 +243,12 @@ class Users{
             }
     }
 
-    public function InsertTokenPasswordForgot(string $user)
+    public function InsertTokenPasswordForgot(string $token, string $email)
     {
         $co = new Connexion();
         $dbco = $co->getConnexion();
-        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Login,Password, IdUserType)
-        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Login,MD5(:Password), :IdUserType)");
-        $request->execute(dismountU($user));
+        $request = $dbco->prepare("UPDATE users set Token = :Token WHERE Email = :Email");
+        $request->execute(array('Token' => $token, 'Email' => $email));
     }
 
     public function InsertUser(Users $user)
