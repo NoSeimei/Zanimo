@@ -85,7 +85,10 @@ if (isset ($_POST['NomAdd']))
        
     </tbody>
 </table>
-
+<form id='formMod".$unAnimal->getId()."' name='formMod".$unAnimal->getId()."' action='addfamille.php' method='post'>
+            <input type='hidden' id='Idan' name='Idan' value='".$unAnimal->getId()."'>
+             <input type='Submit' value='modifier' class='btn btn-primary'>
+              </form>
 <script src="js/jquery.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script>
