@@ -30,7 +30,7 @@ if(isset($_POST['email']))
  
     // $update = mysqli_query($conn,"UPDATE users set  password='" . $password . "', reset_link_token='" . $token . "' ,exp_date='" . $expDate . "' WHERE email='" . $emailId . "'");
  
-    $link = "<a href='http://localhost/Zanimo/reset-password.php?key=".$emailId."&token=".$token."'>Click To Reset password</a>";
+    $link = "<a href='http://localhost/Zanimo/reset-password.php?key=".$emailId."&token=".$token."'>Réinitialisez le mot de passe</a>";
  
     $mail = new PHPMailer();
  

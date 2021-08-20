@@ -1,8 +1,14 @@
 <?php
-include("Class/UserType.php"); 
-$usersType = new UserType();
-$usersType = $usersType->GetAllUserType();
-?>
+if(isset($_POST['newpassword']) && isset($_POST['confirmnewpassword']) && $_POST['reset_link_token'] && $_POST['email'])
+{
+include("Class/Users.php"); 
+$emailId = $_POST['email'];
+// $token = $_POST['reset_link_token'];
+$password = md5($_POST['newpassword']);
+$user = new Users();
+$isExist = $user->UpdateNewPassword($emailId, $password);
+
+if($isExist == true){ ?>
 <!doctype html>
 <html lang="en">
 
@@ -16,21 +22,12 @@ $usersType = $usersType->GetAllUserType();
     <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
-    <form class="login" action="signIn.php" method="post">
-        <input type="text" placeholder="Nom" name="firstname">
-        <input type="text" placeholder="Prénom" name="lastname">
-        <input type="date" placeholder="Date de naissance" name="dateN">
-        <input type="tel" placeholder="Téléphone" name="telephone">
-        <input type="mail" placeholder="Email" name="mail">
-        <input type="text" placeholder="Identifiant" name="login">
-        <input type="password" placeholder="Mot de passe" name="password">
-        <input type="password" placeholder="Confirmation mot de passe" name="confirmpassword">
-        <select class="selection-1" name="idUserType">
-            <?php foreach ($usersType as $userType) { ?> <option value="<?php echo $userType->getId_TypeUser(); ?>"> <?php echo $userType->getTypeUser(); ?></option>
-                <?php } ?>
-        </select><br/>
-        <button>Inscription</button>
+
+    <form class="login" action="index.html" method="post">
+        <h2>Votre mot de passe a bien été modifié !</h2>
+        <button style="width: 150px;">Se connecter</button>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,3 +37,9 @@ $usersType = $usersType->GetAllUserType();
 </body>
 
 </html>
+<?php
+}else{
+echo "<p>Something goes wrong. Please try again</p>";
+}
+}
+?>
