@@ -42,7 +42,7 @@
                 <li><a href="#">All Items</a></li>
               </ul>
             </li>
-            <li><a href="vaccination.php">Vaccination</a></li>
+            <li class="active"><a href="vaccination.php">Vaccination</a></li>
             <li><a href="#">License</a></li>
             <li class="active"><a href="compte.php">Mon compte</a></li>
           </ul>
@@ -56,7 +56,7 @@
      
     <!-- Content -->
     <div class="container">
-      <h3 class="text-center">Mon compte</h3>
+      <h3 class="text-center">Ajouter une vaccination</h3>
 	  <form class="login" action="signIn.php" method="post">
         <input type="text" placeholder="Nom" name="firstname">
         <input type="text" placeholder="Prénom" name="lastname">
@@ -67,8 +67,9 @@
         <input type="password" placeholder="Ancien Mot de passe" name="password">
 		<input type="password" placeholder="Nouveau Mot de passe" name="password">
 		<br/>
-        <button>Enregistrer</button> <button>Voir liste Vaccination</button>
+        <button>Enregistrer</button> 
     </form>
+    <button><p>Voir liste Vaccination</p></button>
 	</div><!-- End Content -->
     <!-- Footer -->
     <div class="footer text-center">

@@ -29,7 +29,7 @@
         </div>
         <nav role="navigation" class="collapse navbar-collapse navbar-right">
           <ul class="navbar-nav nav">
-            <li class="active"><a href="#">Accueil</a></li>
+            <li class="active"><a href="accueil.php">Accueil</a></li>
             <li class="dropdown">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">
