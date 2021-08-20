@@ -40,7 +40,7 @@
                 <li><a href="#">All Items</a></li>
               </ul>
             </li>
-            <li><a href="#">Vaccination</a></li>
+            <li><a href="vaccination">Vaccination</a></li>
             <li><a href="#">License</a></li>
             <li><a href="compte.php">Mon compte</a></li>
           </ul>

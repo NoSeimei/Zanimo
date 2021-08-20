@@ -63,11 +63,10 @@
         <input type="date" placeholder="Date de naissance" name="dateN">
         <input type="tel" placeholder="Téléphone" name="telephone">
         <input type="mail" placeholder="Email" name="mail">
-        <input type="text" placeholder="Identifiant" name="login">
         <input type="password" placeholder="Ancien Mot de passe" name="password">
 		<input type="password" placeholder="Nouveau Mot de passe" name="password">
 		<br/>
-        <button>Enregistrer</button> <button>Voir liste Vaccination</button>
+        <button>Enregistrer</button> 
     </form>
 	</div><!-- End Content -->
     <!-- Footer -->

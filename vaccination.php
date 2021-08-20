@@ -1,4 +1,32 @@
+<?php
 
+include("Function/Function.php");
+include("Class/Users.php");
+
+if (isset($_POST["firstname"]))
+	{
+		try{ 
+		  //on verifie que l'identifiant du client n'existe pas avent de l'inscrire
+		  		$login = $_POST["login"];
+				$vaccination = new Vaccination();
+				$test = $user->CheckUser($login);
+				if($test == false)
+				{
+
+				$vaccination->setDateVacc($_POST["dateV"]);
+				$vaccination->setProduit($_POST["produit"]);
+				$vaccination->setDateRapp($_POST["dateR"]);
+				
+			  	$user->InsertVaccination($vaccination);
+				}
+        }
+        catch(Exception $ex){
+	  
+                echo $ex;
+          
+            }
+        }
+        ?>
 <!DOCTYPE html>
 
 <html>
@@ -44,7 +72,7 @@
             </li>
             <li class="active"><a href="vaccination.php">Vaccination</a></li>
             <li><a href="#">License</a></li>
-            <li class="active"><a href="compte.php">Mon compte</a></li>
+            <li><a href="compte.php">Mon compte</a></li>
           </ul>
         </nav>
       </div>
@@ -57,24 +85,17 @@
     <!-- Content -->
     <div class="container">
       <h3 class="text-center">Ajouter une vaccination</h3>
-	  <form class="login" action="signIn.php" method="post">
-        <input type="text" placeholder="Nom" name="firstname">
-        <input type="text" placeholder="Prénom" name="lastname">
-        <input type="date" placeholder="Date de naissance" name="dateN">
-        <input type="tel" placeholder="Téléphone" name="telephone">
-        <input type="mail" placeholder="Email" name="mail">
-        <input type="text" placeholder="Identifiant" name="login">
-        <input type="password" placeholder="Ancien Mot de passe" name="password">
-		<input type="password" placeholder="Nouveau Mot de passe" name="password">
+	  <form class="login" action="#" method="post">
+        <input type="date" placeholder="Date de vaccination" name="dateV">
+        <input type="tel" placeholder="Produit" name="produit">
+        <input type="date" placeholder="Date de rappel" name="dateR">
+        Animal : <select class="selection-1" name="idUserType"> 
+        </select><br/>
 		<br/>
         <button>Enregistrer</button> 
     </form>
     <button><p>Voir liste Vaccination</p></button>
 	</div><!-- End Content -->
-    <!-- Footer -->
-    <div class="footer text-center">
-        <p>&copy; 2021 Zanimo. All Rights Reserved.</p>
-    </div><!-- End Footer -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- // <script src="https://code.jquery.com/jquery.js"></script> -->
