@@ -1,5 +1,78 @@
 <?php
+if(!isset($leClient)){
+    $leClient = "";
+          $nomC ="";
+          $prenomC="";
+          $mailC="";
+          $identC="";
+          $telephoneC="";
+}
 
+include('Class/Users.php');
+include("Function/Function.php");
+
+if(!isset($_SESSION['nom'])){
+	
+	$_SESSION['nom']="";
+	$_SESSION['prenom']="";
+	$_SESSION['tel']="";
+	$_SESSION['mail']="";
+}
+
+	
+		 
+		try{ 
+            //on selectionne le client qu'on veut modifier ici le client lui même
+            $uncli = $_SESSION['leClient2'];
+		    $requete = $db->query("SELECT * FROM `users` WHERE Login = $uncli");
+		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+		    $client = $requete->fetchAll();
+
+
+            $leClient = $_SESSION['leClient2'];
+            $nomC= $_SESSION['nom2'];
+            $prenomC= $_SESSION['prenom2'];
+            $mailC= $_SESSION['mail2'];
+            $identC= $_SESSION['ident2'];
+            $telephoneC= $_SESSION['telephone2'] ;
+			//si seul le numero de téléphone est modifier on fais en sorte de modifier seulemetn le téléphone dans la bdd
+         if (isset($_POST['phone']) && !isset($_POST['pass2'])){
+             
+            $phone= $_POST["phone"];
+           $request = $db->prepare("UPDATE clients SET Telephone = :Telephone
+           WHERE Id_Client= :IdClient");
+           $request->execute(array('Telephone'=>$phone,'IdClient'=>$leClient));
+           $_SESSION['telephone2'] = $phone;
+           $telephoneC= $_SESSION['telephone2'] ;
+		 }
+		 //ici on vérifie que le mdp est bien renseigné puis on vérifie que les deux mdp soient egaux
+         elseif(isset($_POST['pass2']) && isset($_POST['confpass'])){
+             $confpass=$_POST['confpass'];
+             $passw= $_POST['pass2'];
+
+             if($passw === $confpass){
+                $phone= $_POST["phone"];
+                $request2 = $db->prepare("UPDATE clients SET Telephone = :Telephone, Password = MD5(:Password)
+                WHERE Id_Client= :IdClient");
+                $request2->execute(array('Telephone'=>$phone,'Password'=>$passw,'IdClient'=>$leClient));
+                $_SESSION['telephone2'] = $phone;
+                $telephoneC= $_SESSION['telephone2'] ;
+             }
+             else{
+                echo  " <script>
+                    mafonction3();
+                </script>";
+             }
+            
+         }
+		 }
+		 
+		
+		catch(Exception $ex){
+	  
+			echo $ex;
+	  
+		}
 ?>
 <!DOCTYPE html>
 
