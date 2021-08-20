@@ -42,7 +42,7 @@
             </li>
             <li><a href="#">Vaccination</a></li>
             <li><a href="#">License</a></li>
-            <li><a href="#">Mon compte</a></li>
+            <li><a href="compte.php">Mon compte</a></li>
           </ul>
         </nav>
       </div>
@@ -131,7 +131,7 @@
     </div><!-- End Content -->
     <!-- Footer -->
     <div class="footer text-center">
-        <p>&copy; 2014 Zoo Planet. All Rights Reserved. Proudly created by <a class="green" href="http://bootshape.com">Bootshape.com</a></p>
+        <p>&copy; 2021 Zanimo. All Rights Reserved.</p>
     </div><!-- End Footer -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
