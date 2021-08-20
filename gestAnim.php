@@ -10,15 +10,28 @@ include("Class/animal.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <!--Bootshape-->
+    <link href="css/bootshape.css" rel="stylesheet">
+
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css">
 
 <table id="table_id" class="display" name="table">
     <thead>
         <tr>
-            <th scope="col">Column 1</th>
-            <th scope="col">Column 2</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Robe</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Espece</th>
+            <th scope="col">Poids</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Numero de puce</th>
+            <th scope="col">Personnel affilié</th>
+            <th scope="col">Option</th>
         </tr>
     </thead>
     <tbody>
@@ -29,15 +42,21 @@ include("Class/animal.php");
     {
     
         echo "<tr>
-            <td>".$unAnimal->getNom()."</td>
-            <td>".$unAnimal->getRobe()."</td>
-            <td>".$unAnimal->getEtat()."</td>
-            <td>".$unAnimal->getEspece()."</td>
-            <td>".$unAnimal->getPoids()."</td>
-            <td>".$unAnimal->getDateDeNaissance()."</td>
-            <td>".$unAnimal->getNumeroPuce()."</td>
-            <td>".$unAnimal->getIdUsers()."</td>
-            <td><input type=button value='test'></input></td>
+            <td scope='row'>".$unAnimal->getNom()."</td>
+            <td >".$unAnimal->getRobe()."</td>
+            <td >".$unAnimal->getEtat()."</td>
+            <td >".$unAnimal->getEspece()."</td>
+            <td >".$unAnimal->getPoids()."</td>
+            <td >".$unAnimal->getDateDeNaissance()."</td>
+            <td >".$unAnimal->getNumeroPuce()."</td>
+            <td >".$unAnimal->getIdUsers()."</td>
+            
+            <td >
+            <form id='formMod".$unAnimal->getId()."' name='formMod".$unAnimal->getId()."' action='modificationanimal.php' method='post'>
+            <input type='hidden' id='Idan' name='Idan' value='".$unAnimal->getId()."'>
+             <input type='Submit' value='modifier' class='btn btn-primary'>
+              </form>
+              </td>
         </tr>";
     
     }
@@ -47,14 +66,20 @@ include("Class/animal.php");
     </tbody>
 </table>
 
-
-    
-</body>
-    
-    <script type="text/javascript" charset="utf8" src="DataTables/datatables.min.js"></script>
+<script src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script>
     $(document).ready( function () {
     $('#table_id').DataTable();
     } );
     </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- // <script src="https://code.jquery.com/jquery.js"></script> -->
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootshape.js"></script>
+</body>
+
 </html>

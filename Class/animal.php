@@ -186,6 +186,7 @@ Class Animal
             echo $exD;
             }
     }
+    
     public function InsertAnimal(Users $animal)
     {
         $co = new Connexion();
