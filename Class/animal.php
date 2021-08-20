@@ -182,11 +182,26 @@ Class Animal
             $requete->setFetchMode(PDO::FETCH_CLASS, 'Animal');
             $allAnimal = $requete->fetchAll();
             return $allAnimal;
+            } 
+        catch (Exception $exD)
+         {
+            echo $exD;
+        }
+    }
+    public function GetOneAnimal(Int $id) 
+    {
+        try {
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM animal WHERE id = :id");
+            $requete->execute(array('id' => $id));
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'Animal');
+            $OneAnimal = $requete->fetch();
+            return $OneAnimal;
             } catch (Exception $exD) {
             echo $exD;
             }
     }
-    
     public function InsertAnimal(Users $animal)
     {
         $co = new Connexion();

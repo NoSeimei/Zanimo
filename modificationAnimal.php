@@ -1,7 +1,8 @@
 
 <?php
-
-echo $_POST['Idan'];
+include("Class/animal.php");
+$Oneanimal= NEW Animal();
+$theanimal = $Oneanimal->GetOneAnimal($_POST['Idan']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,40 +17,46 @@ echo $_POST['Idan'];
     <link href="css/bootshape.css" rel="stylesheet">
 </head>
 <body>
-<form>
-      
-  <div class="form-row">
-    <div class="form-group col-md-6">
+<form id="modif" name="modif" action="gestAnim.php" method="POST">
+<?php    
+
+    echo  '<div class="form-row">
+    <div class="form-group col-md-4">
       <label for="inputEmail4">Nom</label>
-      <input type="text" class="form-control" id="inputEmail4" placeholder="Nom">
+      <input type="text" class="form-control" value="'.$theanimal->GetNom().'" id="inputEmail4" placeholder="Nom">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="inputPassword4">Robe</label>
-      <input type="text" class="form-control" id="inputPassword4" placeholder="Robe">
+      <input type="text" class="form-control" value="'.$theanimal->GetRobe().'" id="inputPassword4" placeholder="Robe">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPassword4">Robe</label>
+      <input type="text" class="form-control" value="'.$theanimal->GetEtat().'" id="inputPassword4" placeholder="Etat">
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-row ">
+  <div class="form-group col-md-4">
     <label for="inputAddress">Etat</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Etat">
+    <input type="text" class="form-control" value="'.$theanimal->GetEspece().'" id="inputAddress" placeholder="Espece">
   </div>
-  <div class="form-group">
+  <div class="form-group col-md-4">
     <label for="inputAddress2">Espece</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Espece">
+    <input type="number" class="form-control"  value="'.$theanimal->GetPoids().'"id="inputAddress2" placeholder="Poids">
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
+  
+  
+    <div class="form-group col-md-4">
       <label for="inputCity">Poids</label>
-      <input type="number" class="form-control" id="Poids">
+      <input type="date" class="form-control"  value="'.$theanimal->GetDateDeNaissance().'" id="DateDeNaissance">
     </div>
-    <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">Date de naissance</label>
-      <input type="date" class="form-control" id="Date"placeholder="Espece">
-    </div>
+    </div>';
+
+  
     
-   
+    
+   ?>
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
 
 </form> 
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
