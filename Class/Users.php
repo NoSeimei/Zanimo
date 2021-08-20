@@ -216,13 +216,40 @@ class Users{
 		    $requete->execute(array('Identifiant' => $ident));
 		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
 		    $user = $requete->fetchAll();
-            if(empty($user)){
+            if(count($user) < 0){
                 $isUserExist = false;
             }
             return $isUserExist;
             } catch (Exception $exD) {
             echo $exD;
             }
+    }
+
+    public function CheckMail(string $email) {
+        try {
+            $isMailExist = true;
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM `users` WHERE Email = :Email");
+		    $requete->execute(array('Email' => $email));
+		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+		    $user = $requete->fetchAll();
+            if(count($user) < 0){
+                $isMailExist = false;
+            }
+            return $isMailExist;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+
+    public function InsertTokenPasswordForgot(string $user)
+    {
+        $co = new Connexion();
+        $dbco = $co->getConnexion();
+        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Login,Password, IdUserType)
+        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Login,MD5(:Password), :IdUserType)");
+        $request->execute(dismountU($user));
     }
 
     public function InsertUser(Users $user)
