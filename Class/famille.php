@@ -144,8 +144,8 @@ Class Famille
         try {
             $co = new Connexion();
             $dbco = $co->getConnexion();
-            $requete = $dbco->query("SELECT * FROM animal");
-            $requete->setFetchMode(PDO::FETCH_CLASS, 'Animal');
+            $requete = $dbco->query("SELECT * FROM Famille");
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'Famille');
             $allFamille = $requete->fetchAll();
             return $allFamille;
             } catch (Exception $exD) {
