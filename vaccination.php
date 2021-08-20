@@ -1,33 +1,4 @@
-<?php
 
-include("Function/Function.php");
-include("Class/Users.php");
-include("Class/Vaccination.php");
-
-if (isset($_POST["firstname"]))
-	{
-		try{ 
-		  //on verifie que l'identifiant du client n'existe pas avent de l'inscrire
-		  		$login = $_POST["login"];
-				$vaccination = new Vaccination();
-				$test = $user->CheckUser($login);
-				if($test == false)
-				{
-
-				$vaccination->setDateVacc($_POST["dateV"]);
-				$vaccination->setProduit($_POST["produit"]);
-				$vaccination->setDateRapp($_POST["dateR"]);
-				
-			  	$user->InsertVaccination($vaccination);
-				}
-        }
-        catch(Exception $ex){
-	  
-                echo $ex;
-          
-            }
-        }
-        ?>
 <!DOCTYPE html>
 
 <html>
