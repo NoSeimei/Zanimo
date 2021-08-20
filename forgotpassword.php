@@ -21,13 +21,14 @@ if(isset($_POST['email']))
      
      $token = md5($emailId).rand(10,9999);
  
+     $Users->InsertTokenPasswordForgot($token, $emailId);
     //  $expFormat = mktime(
     //  date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
     //  );
  
     // $expDate = date("Y-m-d H:i:s",$expFormat);
  
-   $update = mysqli_query($conn,"UPDATE users set  password='" . $password . "', reset_link_token='" . $token . "' ,exp_date='" . $expDate . "' WHERE email='" . $emailId . "'");
+    // $update = mysqli_query($conn,"UPDATE users set  password='" . $password . "', reset_link_token='" . $token . "' ,exp_date='" . $expDate . "' WHERE email='" . $emailId . "'");
  
     $link = "<a href='http://localhost/Zanimo/reset-password.php?key=".$emailId."&token=".$token."'>Click To Reset password</a>";
  
