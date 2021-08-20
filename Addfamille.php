@@ -14,8 +14,8 @@ include("Class/animal.php");
     <link href="css/bootshape.css" rel="stylesheet">
 </head>
 <body>
-<form id="ajout" name="ajout" action="gestAnim.php" method="POST">
-  
+<form id="ajout" name="ajout" action="gestFamille.php" method="POST">
+
 
     <div class="form-row">
     <div class="form-group col-md-4">
@@ -24,27 +24,27 @@ include("Class/animal.php");
     </div>
     <div class="form-group col-md-4">
       <label for="inputPassword4">Robe</label>
-      <input type="text" class="form-control"  id="RobeAdd" placeholder="Robe">
+      <input type="text" class="form-control"  id="Num1" placeholder="Num">
     </div>
     <div class="form-group col-md-4">
       <label for="inputPassword4">Robe</label>
-      <input type="text" class="form-control"  id="EtatAdd" placeholder="Etat">
+      <input type="text" class="form-control"  id="Num2" placeholder="Etat">
     </div>Nom
   </div>
   <div class="form-row ">
   <div class="form-group col-md-4">
     <label for="inputAddress">Etat</label>
-    <input type="text" class="form-control"  id="EspeceAdd" placeholder="Espece">
+    <input type="text" class="form-control"  id="Email" placeholder="Espece">
   </div>
   <div class="form-group col-md-4">
     <label for="inputAddress2">Espece</label>
-    <input type="number" class="form-control"  id="PoidsAdd" placeholder="Poids">
+    <input type="number" class="form-control"  id="Adresse" placeholder="Poids">
   </div>
   
   
     <div class="form-group col-md-4">
       <label for="inputCity">Poids</label>
-      <input type="date" class="form-control"   id="DateDeNaissanceAdd">
+      <input type="date" class="form-control"   id="CodePostal">
     </div>
     </div>
 

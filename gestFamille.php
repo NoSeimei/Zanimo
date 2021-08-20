@@ -1,22 +1,23 @@
 <?php
 
-include("Class/animal.php");
+include("Class/famille.php");
 if (isset ($_POST['NomAdd']))
 {
     {
 		try{ 
 		  //on verifie que l'identifiant du client n'existe pas avent de l'inscrire
 		  		
-				$animal = new animal();
 				
-				$animal->SetNom($_POST["NomAdd"]);
-				$animal->SetRobe($_POST["RobeAdd"]);
-				$animal->SetEtat($_POST["EtatAdd"]);
-				$animal->SetEspece($_POST["EspeceAdd"]);
-				$animal->SetPoids($_POST["PoidsAdd"]);
-				$animal->SetDateDeNaissance($_POST["DateDeNaissanceAdd"]);
+				$Famille = new Famille();
 				
-			  	$animal->InsertAnimal($animal);
+				$Famille->SetNom($_POST["Nom"]);
+				$Famille->SetNum1($_POST["Num1"]);
+				$Famille->SetNum2($_POST["Num2"]);
+				$Famille->SetEmail($_POST["Email"]);
+				$Famille->SetAdresse($_POST["Adresse"]);
+				$Famille->SetCodePostal($_POST["CodePostal"]);
+				
+			  	$Famille->InsertFamille($anFamilleimal);
 				
         }
         catch(Exception $ex){
@@ -48,36 +49,31 @@ if (isset ($_POST['NomAdd']))
     <thead>
         <tr>
             <th scope="col">Nom</th>
-            <th scope="col">Robe</th>
-            <th scope="col">Etat</th>
-            <th scope="col">Espece</th>
-            <th scope="col">Poids</th>
-            <th scope="col">Date de naissance</th>
-            <th scope="col">Numero de puce</th>
-            <th scope="col">Personnel affilié</th>
-            <th scope="col">Option</th>
+            <th scope="col">Num1</th>
+            <th scope="col">Num2</th>
+            <th scope="col">Email</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">CodePostal</th>
         </tr>
     </thead>
     <tbody>
     <?php
-    $Animal = NEW Animal();
-    $AllAnimal = $Animal->GetAllAnimal();
-    foreach($AllAnimal as $unAnimal)
+    $Famille = NEW Famille();
+    $AllFamille = $Famille->GetAllFamille();
+    foreach($AllFamille as $unFamille)
     {
     
         echo "<tr>
-            <td scope='row'>".$unAnimal->getNom()."</td>
-            <td >".$unAnimal->getRobe()."</td>
-            <td >".$unAnimal->getEtat()."</td>
-            <td >".$unAnimal->getEspece()."</td>
-            <td >".$unAnimal->getPoids()."</td>
-            <td >".$unAnimal->getDateDeNaissance()."</td>
-            <td >".$unAnimal->getNumeroPuce()."</td>
-            <td >".$unAnimal->getIdUsers()."</td>
+            <td scope='row'>".$unFamille->getNom()."</td>
+            <td >".$unFamille->getNom()."</td>
+            <td >".$unFamille->getNum1()."</td>
+            <td >".$unFamille->getEmail()."</td>
+            <td >".$unFamille->getAdresse()."</td>
+            <td >".$unFamille->getCodePostal()."</td>
             
             <td >
-            <form id='formMod".$unAnimal->getId()."' name='formMod".$unAnimal->getId()."' action='modificationanimal.php' method='post'>
-            <input type='hidden' id='Idan' name='Idan' value='".$unAnimal->getId()."'>
+            <form id='formMod".$unFamille->getId()."' name='formMod".$unFamille->getId()."' action='modificationanimal.php' method='post'>
+            <input type='hidden' id='Idan' name='Idan' value='".$unFamille->getId()."'>
              <input type='Submit' value='modifier' class='btn btn-primary'>
               </form>
               </td>

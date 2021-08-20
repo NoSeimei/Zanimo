@@ -202,7 +202,7 @@ Class Animal
             echo $exD;
             }
     }
-    public function InsertAnimal(Users $animal)
+    public function InsertAnimal(Animal $animal)
     {
         $co = new Connexion();
         $dbco = $co->getConnexion();

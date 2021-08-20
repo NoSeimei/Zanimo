@@ -152,7 +152,21 @@ Class Famille
             echo $exD;
             }
     }
-    public function InsertFamille(Users $Famille)
+    public function GetOneAnimal(Int $id) 
+    {
+        try {
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM Famille WHERE id = :id");
+            $requete->execute(array('id' => $id));
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'Famille');
+            $OneFamille = $requete->fetch();
+            return $OneFamille;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+    public function InsertFamille(Famille $Famille)
     {
         $co = new Connexion();
         $dbco = $co->getConnexion();
