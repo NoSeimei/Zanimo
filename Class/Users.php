@@ -10,8 +10,9 @@ class Users{
     private $DateNaiss;
     private $Telephone;
     private $Email;
-    private $Login;
+    private $Identifiant;
     private $Password;
+    private $Token;
     private $IdUserType;
 
     /**
@@ -134,22 +135,22 @@ class Users{
         return $this;
     }
 
-    /**
-     * Get the value of Login
+      /**
+     * Get the value of Identifiant
      */ 
-    public function getLogin()
+    public function getIdentifiant()
     {
-        return $this->Login;
+        return $this->Identifiant;
     }
 
     /**
-     * Set the value of Login
+     * Set the value of Identifiant
      *
      * @return  self
      */ 
-    public function setLogin($Login)
+    public function setIdentifiant($Identifiant)
     {
-        $this->Login = $Login;
+        $this->Identifiant = $Identifiant;
 
         return $this;
     }
@@ -175,6 +176,26 @@ class Users{
     }
 
     /**
+     * Get the value of Token
+     */ 
+    public function getToken()
+    {
+        return $this->Token;
+    }
+
+    /**
+     * Set the value of Token
+     *
+     * @return  self
+     */ 
+    public function setToken($Token)
+    {
+        $this->Token = $Token;
+
+        return $this;
+    }
+
+    /**
      * Get the value of IdUserType
      */ 
     public function getIdUserType()
@@ -194,14 +215,19 @@ class Users{
         return $this;
     }
 
-    public function GetAllUser() {
+    public function GetAllUser(string $user, $pass) {
         try {
+            $isUserExist = true;
             $co = new Connexion();
             $dbco = $co->getConnexion();
-            $requete = $dbco->query("SELECT * FROM users");
+            $requete = $dbco->prepare("SELECT * FROM users WHERE Identifiant = :Identifiant AND Password = :Password");
+            $requete->execute(array('Identifiant' => $user, 'Password' => $pass));
             $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
-            $allUser = $requete->fetchAll();
-            return $allUser;
+            $user = $requete->fetch();
+            if(count($user) < 0){
+                $isUserExist = false;
+            }
+            return $isUserExist;
             } catch (Exception $exD) {
             echo $exD;
             }
@@ -215,7 +241,7 @@ class Users{
             $requete = $dbco->prepare("SELECT * FROM `users` WHERE Identifiant = :Identifiant");
 		    $requete->execute(array('Identifiant' => $ident));
 		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
-		    $user = $requete->fetchAll();
+		    $user = $requete->fetch();
             if(empty($user)){
                 $isUserExist = false;
             }
@@ -225,14 +251,74 @@ class Users{
             }
     }
 
+    public function CheckMail(string $email) {
+        try {
+            $isMailExist = true;
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM `users` WHERE Email = :Email");
+		    $requete->execute(array('Email' => $email));
+		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+		    $user = $requete->fetchAll();
+            if(count($user) < 0){
+                $isMailExist = false;
+            }
+            return $isMailExist;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+
+    public function CheckResetPassword(string $email, $token) {
+        try {
+            $isUserExist = true;
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $requete = $dbco->prepare("SELECT * FROM `users` WHERE Email = :Email AND Token = :Token");
+		    $requete->execute(array('Email' => $email, 'Token' => $token));
+		    $requete->setFetchMode(PDO::FETCH_CLASS, 'Users');
+		    $user = $requete->fetch();
+            if(empty($user) < 0){
+                $isUserExist = false;
+            }
+            return $isUserExist;
+            } catch (Exception $exD) {
+            echo $exD;
+            }
+    }
+
+
+    public function UpdateNewPassword(string $email, $pass) {
+        try {
+            $co = new Connexion();
+            $dbco = $co->getConnexion();
+            $token = "";
+            $request = $dbco->prepare("UPDATE `users` set `Token` = :Token, `Password` = :Password WHERE Email = :Email");
+            $request->execute(array('Token' => $token, 'Password' => $pass, 'Email' => $email));
+            return true;
+        } catch (Exception $exD) {
+        echo $exD;
+        }
+    }
+
+
+    public function InsertTokenPasswordForgot(string $token, string $email)
+    {
+        $co = new Connexion();
+        $dbco = $co->getConnexion();
+        $request = $dbco->prepare("UPDATE `users` set `Token` = :Token WHERE Email = :Email");
+        $request->execute(array('Token' => $token, 'Email' => $email));
+    }
+
     public function InsertUser(Users $user)
     {
         $co = new Connexion();
         $dbco = $co->getConnexion();
-        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Login,Password, IdUserType)
-        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Login,MD5(:Password), :IdUserType)");
+        $request = $dbco->prepare("INSERT INTO users (Nom,Prenom,DateNaiss,Telephone,Email,Identifiant,Password, Token,IdUserType)
+        VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Identifiant,MD5(:Password), :Token,:IdUserType)");
         $request->execute(dismountU($user));
     }
 
+  
 }
 ?>

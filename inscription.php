@@ -11,12 +11,15 @@ $usersType = $usersType->GetAllUserType();
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
-    <link rel="stylesheet" href="css/login.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    
+    <!--Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Duru+Sans|Actor' rel='stylesheet' type='text/css'>
+    
+    <!--Bootshape-->
+    <link href="css/bootshape.css" rel="stylesheet">
 </head>
-
 <body>
     <form class="login" action="signIn.php" method="post">
         <input type="text" placeholder="Nom" name="firstname">
@@ -26,6 +29,7 @@ $usersType = $usersType->GetAllUserType();
         <input type="mail" placeholder="Email" name="mail">
         <input type="text" placeholder="Identifiant" name="login">
         <input type="password" placeholder="Mot de passe" name="password">
+        <input type="password" placeholder="Confirmation mot de passe" name="confirmpassword">
         <select class="selection-1" name="idUserType">
             <?php foreach ($usersType as $userType) { ?> <option value="<?php echo $userType->getId_TypeUser(); ?>"> <?php echo $userType->getTypeUser(); ?></option>
                 <?php } ?>

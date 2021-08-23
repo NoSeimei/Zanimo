@@ -3,7 +3,7 @@
 include("Function/Function.php");
 include("Class/Users.php");
 
-if (isset($_POST["firstname"]))
+if (isset($_POST["firstname"]) && (isset($_POST["password"]) == isset($_POST["confirmpassword"])))
 	{
 		try{ 
 		  //on verifie que l'identifiant du client n'existe pas avent de l'inscrire
@@ -17,11 +17,15 @@ if (isset($_POST["firstname"]))
 				$user->setDateNaiss($_POST["dateN"]);
 				$user->setTelephone($_POST["telephone"]);
 				$user->setEmail($_POST["mail"]);
-				$user->setLogin($_POST["login"]);
+				$user->setIdentifiant($_POST["login"]);
 				$user->setPassword($_POST["password"]);
+				$user->setToken("");
 				$user->setIdUserType($_POST["idUserType"]);
 				
 			  	$user->InsertUser($user);
+				header("Location: index.html");
+				}else{
+					echo "Cet utilisateur existe déjà ! ";
 				}
         }
         catch(Exception $ex){
