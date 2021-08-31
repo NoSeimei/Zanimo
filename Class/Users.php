@@ -287,7 +287,6 @@ class Users{
             }
     }
 
-
     public function UpdateNewPassword(string $email, $pass) {
         try {
             $co = new Connexion();
@@ -300,7 +299,6 @@ class Users{
         echo $exD;
         }
     }
-
 
     public function InsertTokenPasswordForgot(string $token, string $email)
     {
@@ -318,7 +316,5 @@ class Users{
         VALUES (:Nom,:Prenom, :DateNaiss,:Telephone,:Email,:Identifiant,MD5(:Password), :Token,:IdUserType)");
         $request->execute(dismountU($user));
     }
-
-  
 }
 ?>
