@@ -6,7 +6,7 @@ include("Class/Users.php");
 if (isset($_POST["firstname"]) && (isset($_POST["password"]) == isset($_POST["confirmpassword"])))
 	{
 		try{ 
-		  //on verifie que l'identifiant du client n'existe pas avent de l'inscrire
+		  //on verifie que l'identifiant du client n'existe pas avant de l'inscrire
 		  		$login = $_POST["login"];
 				$user = new Users();
 				$test = $user->CheckUser($login);
