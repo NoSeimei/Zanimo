@@ -131,7 +131,7 @@ class Users{
         $co = new Connexion();
         $dbco = $co->getConnexion();
         $request = $dbco->prepare("INSERT INTO vaccination(Id, DateVaccination, ProduitUtilisee, DateRappelVac, IdUsers, IdAnimal)
-        VALUES (Id, DateVaccination, ProduitUtilisee, DateRappelVac, IdUsers, IdAnimal");
+        VALUES (:Id, :DateVaccination,:ProduitUtilisee, :DateRappelVac, :IdUsers, :IdAnimal");
         $request->execute(dismountU($user));
     }
 
