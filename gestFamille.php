@@ -17,7 +17,12 @@ if (isset ($_POST['NomAdd']))
 				$Famille->SetAdresse($_POST["Adresse"]);
 				$Famille->SetCodePostal($_POST["CodePostal"]);
 				
-			  	$Famille->InsertFamille($anFamilleimal);
+                  $Famille->InsertFamille($anFamilleimal);
+                  $co = new Connexion();
+        $dbco = $co->getConnexion();
+        $request = $dbco->prepare("INSERT INTO famille( Nom, Num1, Num2, Email, Adresse, CodePostal) 
+        VALUES (:id, :Nom, :Num1, :Num2, :Email, :Adresse, :CodePostal)");
+        $request->execute( "Nom"=$_POST["Nom"], "Num1"=$_POST["Num1"], "Num2"=$_POST["Num2"], "Email"=$_POST["Email"], "Adresse"=$_POST["Adresse"],"CodePostal"=$_POST["CodePostal"]);
 				
         }
         catch(Exception $ex){

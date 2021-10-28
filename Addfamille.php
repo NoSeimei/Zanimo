@@ -38,13 +38,13 @@ include("Class/animal.php");
   </div>
   <div class="form-group col-md-4">
     <label for="inputAddress2">Espece</label>
-    <input type="number" class="form-control"  id="Adresse" placeholder="Poids">
+    <input type="text" class="form-control"  id="Adresse" placeholder="Poids">
   </div>
   
   
     <div class="form-group col-md-4">
       <label for="inputCity">Poids</label>
-      <input type="date" class="form-control"   id="CodePostal">
+      <input type="text" class="form-control"   id="CodePostal">
     </div>
     </div>
 
